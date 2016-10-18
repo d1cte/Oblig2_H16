@@ -94,19 +94,30 @@ public class MyLinkedListTest {
 		assertThat(list.lastIndexOf("Sofie"), is(3));
 	}
 	
-//	@Test
-//	public void setShouldReplaceElementAtIndex() {
-//		MyLinkedList<String> list = new MyLinkedList<>();
-//		list.add("Anna");
-//		list.add("Sofie");
-//		list.add("Anna");
-//		list.add("Sofie");
-//		list.set(2, "Maria");
-//		
-//		assertThat(list.get(2), is("Maria"));
-//		assertThat(list.lastIndexOf("Sofie"), is(3));
-//	}
-//	@Test
+	@Test
+	public void setShouldReplaceElementAtIndex() {
+		MyLinkedList<String> list = new MyLinkedList<>();
+		list.add("Anna");
+		list.add("Anna");
+		list.add("Anna");
+		list.add("Anna");
+		list.add("Anna");
+		list.add("Anna");
+		assertNotNull(list.set(2, "Maria"));
+		assertNotNull(list.set(5, "Sofie"));
+		
+		assertThat(list.get(2), is("Maria"));
+		assertThat(list.get(5), is("Sofie"));
+	}
+	@Test
+	public void setWithIndexOutOfBondsShouldReturnNull() {
+		MyLinkedList<String> list = new MyLinkedList<>();
+		list.add("Anna");
+		assertNull(list.set(7, "Sofie"));
+		assertNull(list.set(-1, "Sofie"));
+
+	}
+
 
 
 

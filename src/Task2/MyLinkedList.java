@@ -231,6 +231,17 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 				 * with the specified element.
 				 */
 	public E set(int index, E e) {
+		// Usikker på hva denne skulle returnere
+		// Valgte å la den returnere den gamle noden. 
+		if(index >= 0 && index < size) {
+			Node<E> oldNode = head;
+			for(int i = 0; i < index; i++) {
+				oldNode = oldNode.next;
+			}
+			Node<E> tempNode = oldNode;
+			oldNode.element = e;
+			return tempNode.element;
+		}
 		return null;
 	}
 
