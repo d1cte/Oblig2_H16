@@ -71,6 +71,43 @@ public class MyLinkedListTest {
 		assertTrue(list.contains("Anna"));
 		assertTrue(list.contains("Sofie"));
 	}
+	
+	@Test
+	public void lastIndexOfWithNoMatchShouldReturnNegativeNum() {
+		MyLinkedList<String> list = new MyLinkedList<>();
+		list.add("Anna");
+		list.add("Anna2");
+		
+		assertThat(list.lastIndexOf("anna"), is(-1));
+		assertThat(list.lastIndexOf("Sofie"), is(-1));
+	}
+	
+	@Test
+	public void lastIndexOfWithMatchShouldReturnLastIndex() {
+		MyLinkedList<String> list = new MyLinkedList<>();
+		list.add("Anna");
+		list.add("Sofie");
+		list.add("Anna");
+		list.add("Sofie");
+		
+		assertThat(list.lastIndexOf("Anna"), is(2));
+		assertThat(list.lastIndexOf("Sofie"), is(3));
+	}
+	
+//	@Test
+//	public void setShouldReplaceElementAtIndex() {
+//		MyLinkedList<String> list = new MyLinkedList<>();
+//		list.add("Anna");
+//		list.add("Sofie");
+//		list.add("Anna");
+//		list.add("Sofie");
+//		list.set(2, "Maria");
+//		
+//		assertThat(list.get(2), is("Maria"));
+//		assertThat(list.lastIndexOf("Sofie"), is(3));
+//	}
+//	@Test
+
 
 
 }

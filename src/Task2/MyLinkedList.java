@@ -216,8 +216,14 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 				 * Return -1 if no match.
 				 */
 	public int lastIndexOf(E e) {
-		System.out.println("Implementation left as an exercise");
-		return 0;
+		Node<E> current = head;
+		int currentIndex = -1;
+		for(int i = 0; i < size; i++) {
+			if(current.element.equals(e))
+				currentIndex = i;
+			current = current.next;
+		}
+		return currentIndex;
 	}
 
 	@Override /**
@@ -225,7 +231,6 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 				 * with the specified element.
 				 */
 	public E set(int index, E e) {
-		System.out.println("Implementation left as an exercise");
 		return null;
 	}
 
