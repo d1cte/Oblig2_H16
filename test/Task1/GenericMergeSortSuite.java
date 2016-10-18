@@ -5,7 +5,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	GenericMergeSortIntegerTest.class
+	GenericMergeSortIntegerTest.class,
+	GenericMergeSortStringTest.class
 })
 public class GenericMergeSortSuite {
 
