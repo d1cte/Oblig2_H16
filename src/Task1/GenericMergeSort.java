@@ -4,6 +4,8 @@ import java.util.Comparator;
 
 
 public class GenericMergeSort {
+	
+	/** MergeSort using the Comparable **/
 	public static <E extends Comparable<E>> void mergeSort(E[] list) {
 		if(list.length > 1) {
 			// Sort the first half
@@ -44,4 +46,6 @@ public class GenericMergeSort {
 		while(currentIndexList2 < list2.length)
 			temp[currentIndexTemp++] = list2[currentIndexList2++];
 	}
+	
+
 }
