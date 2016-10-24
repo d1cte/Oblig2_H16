@@ -116,6 +116,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		public E element;
 		public TreeNode<E> left;
 		public TreeNode<E> right;
+		public TreeNode<E> parent;
 
 		public TreeNode(E e) {
 			element = e;
