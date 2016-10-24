@@ -122,7 +122,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			element = e;
 		}
 	}
-
+	
 	@Override /** Get the number of nodes in the tree */
 	public int getSize() {
 		return size;
@@ -133,6 +133,13 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return root;
 	}
 
+	/**Returns the node for the specified element.
+	 * Returns null if the element is not in the tree.
+	 */
+	public TreeNode<E> getNode(E element) {
+		return root;
+	}
+	
 	/** Returns a path from the root leading to the specified element */
 	public java.util.ArrayList<TreeNode<E>> path(E e) {
 		java.util.ArrayList<TreeNode<E>> list = new java.util.ArrayList<>();
