@@ -1,5 +1,7 @@
 package Task3;
 
+import java.util.ArrayList;
+
 public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	protected TreeNode<E> root;
 	protected int size = 0;
@@ -209,6 +211,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			if (parent == null) {
 				root = current.right;
 			} else {
+				current.right.parent = parent; //??????
 				if (e.compareTo(parent.element) < 0)
 					parent.left = current.right;
 				else
@@ -241,6 +244,22 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return true; // Element deleted successfully
 	}
 
+	/** Returns the path of elements from the specified
+	 *  element to the root in an array list.
+	 */
+	public ArrayList<E> getPath(E e) {
+		ArrayList<E> path = new ArrayList<>();
+		TreeNode<E> current = getNode(e);
+		
+		do { 
+			path.add(current.element);
+			current = current.parent;
+			
+		} while(current != null);
+			
+		return path;
+	}
+	
 	@Override /** Obtain an iterator. Use inorder. */
 	public java.util.Iterator<E> iterator() {
 		return new InorderIterator();

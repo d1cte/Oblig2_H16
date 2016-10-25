@@ -1,6 +1,8 @@
 package Task3;
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -31,21 +33,28 @@ public class BSTTest {
 	
 	@Test
 	public void afterInsertParentShouldBeSet() {
-		BST<Integer> tree2 = new BST<>();
-		tree2.insert(60);
-		assertNull(tree2.getNode(60).parent);
-		
-		tree2.insert(55);
-		assertThat(tree2.getNode(55).parent, is(tree2.getRoot()));
-		
-		tree2.insert(100);
-		assertThat(tree2.getNode(100).parent, is(tree2.getRoot()));
+		assertNull(tree.getNode(60).parent);
+		assertThat(tree.getNode(55).parent, is(tree.getRoot()));
+		assertThat(tree.getNode(100).parent, is(tree.getRoot()));
+		assertThat(tree.getNode(45).parent, is(tree.getNode(55)));
+		assertThat(tree.getNode(107).parent, is(tree.getNode(100)));
+	}	
 	
-		tree2.insert(45);
-		assertThat(tree2.getNode(45).parent, is(tree2.getNode(55)));
+	@Test
+	public void deleteOneElementLeftParentIsNull() {
+		BST<Integer> tree = new BST<>();
+		tree.insert(2);
+		tree.insert(1);
+		assertTrue(tree.delete(1));
+		assertNull(tree.getRoot().parent);
+	}
+	
+	@Test
+	public void deleteCase1ShouldHaveCorrectParent() {
+		assertTrue(tree.delete(45));
+		assertTrue(tree.delete(55));
+		assertThat(tree.getNode(57).parent, is(tree.getRoot()));
 		
-		tree2.insert(107);
-		assertThat(tree2.getNode(107).parent, is(tree2.getNode(100)));
 	}	
 	
 	@Test
@@ -77,6 +86,17 @@ public class BSTTest {
 		assertFalse(tree.isLeaf(55));
 		assertFalse(tree.isLeaf(100));
 		assertFalse(tree.isLeaf(60));
+	}
+	
+	@Test
+	public void getPathShouldReturnArrayListWithElements() {
+		List path1 = Arrays.asList(67, 100, 60);
+		List path2 = Arrays.asList(57, 55, 60);
+		
+		assertEquals(path1, tree.getPath(67));
+		assertEquals(path2, tree.getPath(57));
+		
+		
 	}
 
 }
