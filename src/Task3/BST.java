@@ -137,7 +137,16 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 	 * Returns null if the element is not in the tree.
 	 */
 	public TreeNode<E> getNode(E element) {
-		return root;
+		TreeNode<E> current = root;
+		while(current != null) {
+			if(element.compareTo(current.element) < 0) 
+				current = current.left;
+			else if(element.compareTo(current.element) > 0)
+				current = current.right;
+			else
+				break;
+		}
+		return current;
 	}
 	
 	/** Returns a path from the root leading to the specified element */
