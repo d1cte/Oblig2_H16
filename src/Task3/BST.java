@@ -259,10 +259,18 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			
 		return path;
 	}
+
+	public ArrayList<E> getPreorderList() {
+		return getPreorderlist();
+	}
 	
 	@Override /** Obtain an iterator. Use inorder. */
 	public java.util.Iterator<E> iterator() {
 		return new InorderIterator();
+	}
+	
+	public java.util.Iterator<E> preorderIterator() {
+		return new PreorderIterator();
 	}
 
 	// Inner class InorderIterator
@@ -308,6 +316,54 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			list.clear(); // Clear the list
 			inorder(); // Rebuild the list
 		}
+	}
+	
+	
+	// Inner class InorderIterator
+	private class PreorderIterator implements java.util.Iterator<E> {
+		// Store the elements in a list
+		private java.util.ArrayList<E> list = new java.util.ArrayList<>();
+		private int current = 0; // Point to the current element in list
+
+		public PreorderIterator() {
+			preorder(); // Traverse binary tree and store elements in list
+		}
+
+		/** Preorder traversal from the root */
+		private void preorder() {
+			preorder(root);
+		}
+
+		/** Preorder traversal from a subtree */
+		private void preorder(TreeNode<E> root) {
+			if (root == null)
+				return;
+			System.out.print(root.element + " ");
+			preorder(root.left);
+			preorder(root.right);
+		}
+
+		@Override /** More elements for traversing? */
+		public boolean hasNext() {
+			if (current < list.size())
+				return true;
+
+			return false;
+		}
+
+		@Override /** Get the current element and move to the next */
+		public E next() {
+			return list.get(current++);
+		}
+
+		@Override /** Remove the current element */
+		public void remove() {
+
+			delete(list.get(current)); // Delete the current element
+			list.clear(); // Clear the list
+			inorder(); // Rebuild the list
+		}
+
 	}
 
 	/** Remove all elements from the tree */
