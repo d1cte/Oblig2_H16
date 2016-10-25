@@ -17,19 +17,15 @@ import org.hamcrest.Matcher;
 public class BSTTest {
 	private static BST<Integer> tree;
 	private static BST<Integer> tree2;
-	private static ArrayList<Integer> preorderIteratorList = new ArrayList<>();
+	private static ArrayList<Integer> preorderIteratorList;
 	private static Integer[] numbers = {60, 
 									55, 100, 
 								45, 57, 67, 107};
 	
-	@BeforeClass
-	public static void setUp() {
+	@Before
+	public void setUp() {
 		tree = new BST<>(numbers);
 		tree2 = new BST<>(numbers);
-		Iterator<Integer> iterator = tree2.preorderIterator();
-		while(iterator.hasNext()) {
-			preorderIteratorList.add(iterator.next());
-		}
 	}
 
 	@Test
@@ -49,20 +45,10 @@ public class BSTTest {
 	}	
 	
 	@Test
-	public void deleteOneElementLeftParentIsNull() {
-		BST<Integer> tree = new BST<>();
-		tree.insert(2);
-		tree.insert(1);
-		assertTrue(tree.delete(1));
-		assertNull(tree.getRoot().parent);
-	}
-	
-	@Test
 	public void deleteCase1ShouldHaveCorrectParent() {
-		assertTrue(tree.delete(45));
-		assertTrue(tree.delete(55));
-		assertThat(tree.getNode(57).parent, is(tree.getRoot()));
-		
+		assertTrue(tree2.delete(45));
+		assertThat(tree2.getNode(55).parent, is(tree2.getNode(60)));
+
 	}	
 	
 	@Test
@@ -100,16 +86,11 @@ public class BSTTest {
 	public void getPathShouldReturnArrayListWithElements() {
 		List<Integer> path1 = Arrays.asList(67, 100, 60);
 		List<Integer> path2 = Arrays.asList(57, 55, 60);
-		
+
 		assertEquals(path1, tree.getPath(67));
 		assertEquals(path2, tree.getPath(57));
 	}
 
-	@Test
-	public void PreorderIteratorTest() {
-		List<Integer> expected = Arrays.asList(60, 55, 45, 57, 59, 100, 67, 107, 101);
-		tree.preorderIterator();
-		assertEquals(expected, preorderIteratorList);
-	}
+
 
 }

@@ -57,8 +57,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			if (e.compareTo(parent.element) < 0) {
 				parent.left = createNewNode(e);
 				parent.left.parent = parent;
-			}
-			else {
+			} else {
 				parent.right = createNewNode(e);
 				parent.right.parent = parent;
 			}
@@ -128,7 +127,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			element = e;
 		}
 	}
-	
+
 	@Override /** Get the number of nodes in the tree */
 	public int getSize() {
 		return size;
@@ -139,31 +138,31 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return root;
 	}
 
-	/** Returns the node for the specified element.
-	 * Returns null if the element is not in the tree.
+	/**
+	 * Returns the node for the specified element. Returns null if the element
+	 * is not in the tree.
 	 */
 	public TreeNode<E> getNode(E element) {
 		TreeNode<E> current = root;
-		while(current != null) {
-			if(element.compareTo(current.element) < 0) 
+		while (current != null) {
+			if (element.compareTo(current.element) < 0)
 				current = current.left;
-			else if(element.compareTo(current.element) > 0)
+			else if (element.compareTo(current.element) > 0)
 				current = current.right;
 			else
 				break;
 		}
 		return current;
 	}
-	
-	
+
 	/** Returns true if the node for the element is a lead */
 	public boolean isLeaf(E element) {
 		TreeNode<E> node = getNode(element);
-		if(node.left == null && node.right == null)
+		if (node.left == null && node.right == null)
 			return true;
 		return false;
 	}
-	
+
 	/** Returns a path from the root leading to the specified element */
 	public java.util.ArrayList<TreeNode<E>> path(E e) {
 		java.util.ArrayList<TreeNode<E>> list = new java.util.ArrayList<>();
@@ -194,9 +193,11 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		while (current != null) {
 			if (e.compareTo(current.element) < 0) {
 				parent = current;
+				current.parent = parent; // -----------------
 				current = current.left;
 			} else if (e.compareTo(current.element) > 0) {
 				parent = current;
+				current.parent = parent; // -----------------
 				current = current.right;
 			} else
 				break; // Element is in the tree pointed at by current
@@ -211,11 +212,13 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			if (parent == null) {
 				root = current.right;
 			} else {
-				current.right.parent = parent; //??????
-				if (e.compareTo(parent.element) < 0)
+				if (e.compareTo(parent.element) < 0) {
 					parent.left = current.right;
-				else
+				}
+					
+				else {
 					parent.right = current.right;
+				}
 			}
 		} else {
 			// Case 2: The current node has a left child
@@ -244,31 +247,28 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return true; // Element deleted successfully
 	}
 
-	/** Returns the path of elements from the specified
-	 *  element to the root in an array list.
+	/**
+	 * Returns the path of elements from the specified element to the root in an
+	 * array list.
 	 */
 	public ArrayList<E> getPath(E e) {
 		ArrayList<E> path = new ArrayList<>();
 		TreeNode<E> current = getNode(e);
-		
-		do { 
+
+		do {
 			path.add(current.element);
 			current = current.parent;
-			
-		} while(current != null);
-			
+
+		} while (current != null);
+
 		return path;
 	}
 
-	public ArrayList<E> getPreorderList() {
-		return getPreorderlist();
-	}
-	
 	@Override /** Obtain an iterator. Use inorder. */
 	public java.util.Iterator<E> iterator() {
 		return new InorderIterator();
 	}
-	
+
 	public java.util.Iterator<E> preorderIterator() {
 		return new PreorderIterator();
 	}
@@ -317,8 +317,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 			inorder(); // Rebuild the list
 		}
 	}
-	
-	
+
 	// Inner class InorderIterator
 	private class PreorderIterator implements java.util.Iterator<E> {
 		// Store the elements in a list
