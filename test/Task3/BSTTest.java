@@ -14,8 +14,9 @@ import org.hamcrest.Matcher;
 
 public class BSTTest {
 	private static BST<Integer> tree;
-	private static Integer[] numbers = {60, 55, 100, 45, 57, 67, 107};
-	
+	private static Integer[] numbers = {60, 
+									55, 100, 
+								45, 57, 67, 107};
 	@BeforeClass
 	public static void setUp() {
 		tree = new BST<>(numbers);
@@ -28,10 +29,24 @@ public class BSTTest {
 		assertNull(emptyTree.getRoot().parent);
 	}
 	
-//	@Test
-//	public void afterInsertParentShouldBeSet() {
-//		assertThat(tree.getNode(59).parent, is(tree.getNode(57)));
-//	}
+	@Test
+	public void afterInsertParentShouldBeSet() {
+		BST<Integer> tree2 = new BST<>();
+		tree2.insert(60);
+		assertNull(tree2.getNode(60).parent);
+		
+		tree2.insert(55);
+		assertThat(tree2.getNode(55).parent, is(tree2.getRoot()));
+		
+		tree2.insert(100);
+		assertThat(tree2.getNode(100).parent, is(tree2.getRoot()));
+	
+		tree2.insert(45);
+		assertThat(tree2.getNode(45).parent, is(tree2.getNode(55)));
+		
+		tree2.insert(107);
+		assertThat(tree2.getNode(107).parent, is(tree2.getNode(100)));
+	}	
 	
 	@Test
 	public void getNodeWithElementNotInTreeShouldReturnNull() {
