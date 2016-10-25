@@ -133,7 +133,7 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 		return root;
 	}
 
-	/**Returns the node for the specified element.
+	/** Returns the node for the specified element.
 	 * Returns null if the element is not in the tree.
 	 */
 	public TreeNode<E> getNode(E element) {
@@ -147,6 +147,15 @@ public class BST<E extends Comparable<E>> extends AbstractTree<E> {
 				break;
 		}
 		return current;
+	}
+	
+	
+	/** Returns true if the node for the element is a lead */
+	public boolean isLeaf(E element) {
+		TreeNode<E> node = getNode(element);
+		if(node.left == null && node.right == null)
+			return true;
+		return false;
 	}
 	
 	/** Returns a path from the root leading to the specified element */

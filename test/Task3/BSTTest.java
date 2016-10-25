@@ -42,5 +42,26 @@ public class BSTTest {
 	public void getNodeFirstElementShouldReturnRoot() {
 		assertThat(tree.getNode(60), is(tree.getRoot()));
 	}
+	
+	@Test
+	public void isLeafTreeWithOneNodeShouldReturnTrue() {
+		BST<Integer> emptyTree = new BST<>();
+		emptyTree.insert(2);
+		assertTrue(emptyTree.isLeaf(2));
+	}
+	
+	@Test
+	public void isLeafShouldReturnTrue() {
+		assertTrue(tree.isLeaf(45));
+		assertTrue(tree.isLeaf(57));
+		assertTrue(tree.isLeaf(107));
+	}
+	
+	@Test
+	public void isLeafShouldReturnFalse() {
+		assertFalse(tree.isLeaf(55));
+		assertFalse(tree.isLeaf(100));
+		assertFalse(tree.isLeaf(60));
+	}
 
 }
